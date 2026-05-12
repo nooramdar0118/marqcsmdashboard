@@ -1,50 +1,748 @@
-M 
-Marq CSM/ Noor's Book of Business
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marq CSM — Noor's Book of Business</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #F7F6F2; --surface: #FFFFFF; --surface2: #F0EFE9; --surface3: #E8E6DF;
+  --border: rgba(0,0,0,0.08); --border-md: rgba(0,0,0,0.13);
+  --text: #1A1917; --text-2: #6B6A65; --text-3: #9B9A95;
+  --coral: #D85A30; --coral-bg: #FAECE7; --coral-dark: #993C1D;
+  --amber: #BA7517; --amber-bg: #FAEEDA; --amber-dark: #854F0B;
+  --green: #3B6D11; --green-bg: #EAF3DE; --green-dark: #27500A;
+  --gray: #5F5E5A; --gray-bg: #F1EFE8;
+  --red: #A32D2D; --red-bg: #FCEBEB;
+  --blue: #185FA5; --blue-bg: #E6F1FB;
+  --purple: #534AB7; --purple-bg: #EEEDFE;
+  --font: 'DM Sans', sans-serif; --mono: 'DM Mono', monospace;
+}
+body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; }
 
-Priority tiers
-Action needed
-Search
+/* HEADER */
+header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 16px 28px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-mark { width: 26px; height: 26px; background: #1A1917; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+.logo-mark span { color: #fff; font-size: 12px; font-weight: 600; }
+.logo-text { font-size: 14px; font-weight: 600; letter-spacing: -0.3px; }
+.logo-sub { font-size: 11px; color: var(--text-3); margin-left: 3px; }
+.header-right { font-size: 11px; color: var(--text-3); font-family: var(--mono); }
 
+/* MAIN */
+.main { max-width: 1340px; margin: 0 auto; padding: 24px 28px; }
 
-Tier
-          All tiers
-          Tier 1 — Act now
-          Tier 2 — Reach out soon
-          Tier 3 — Nurture
-          Tier 4 — Monitor
-        
-Angle
-          All angles
-          Re-engageRe-engage / rescue
-          Renewal risk — escalateDrive adoption
-          Expand usageRenewal prepProduct update
-        
-Outreach
-          All
-          Reached out ✓
-          Not yet
-        
-Export CSV
+/* SUMMARY */
+.summary-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 22px; }
+.scard { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 13px 15px; cursor: default; }
+.scard .val { font-size: 24px; font-weight: 600; letter-spacing: -1px; line-height: 1; margin-bottom: 3px; }
+.scard .lbl { font-size: 11px; color: var(--text-2); line-height: 1.4; }
+.scard .sub { font-size: 10px; color: var(--green); margin-top: 2px; font-family: var(--mono); }
+.s1 .val { color: var(--coral); } .s2 .val { color: var(--amber); } .s3 .val { color: var(--red); }
+.s4 .val { color: var(--green); } .s5 .val { color: var(--purple); } .s6 .val { color: var(--text-2); }
 
-Tier 1 — Act now
+/* TABS */
+.tab-bar { display: flex; border-bottom: 1px solid var(--border-md); margin-bottom: 20px; gap: 0; }
+.tab-btn { font-family: var(--font); font-size: 13px; font-weight: 500; padding: 10px 18px; cursor: pointer; color: var(--text-3); border: none; background: none; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color .15s, border-color .15s; white-space: nowrap; }
+.tab-btn:hover { color: var(--text-2); }
+.tab-btn.active { color: var(--text); border-bottom-color: var(--text); }
+.tab-badge { display: inline-block; font-size: 10px; font-weight: 500; padding: 1px 6px; border-radius: 10px; margin-left: 5px; background: var(--surface2); color: var(--text-3); }
+.tab-btn.active .tab-badge { background: var(--text); color: #fff; }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
 
-Tier 2 — Reach out soon
+/* CONTROLS */
+.controls { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 11px 15px; margin-bottom: 13px; display: flex; flex-wrap: wrap; gap: 9px; align-items: center; }
+.ctrl-group { display: flex; align-items: center; gap: 6px; }
+.ctrl-group label { font-size: 11px; color: var(--text-3); white-space: nowrap; }
+select, input[type=text] { font-family: var(--font); font-size: 12px; padding: 5px 9px; border: 1px solid var(--border-md); border-radius: 7px; background: var(--bg); color: var(--text); outline: none; }
+input[type=text] { width: 200px; }
+.ctrl-sep { width: 1px; height: 18px; background: var(--border-md); }
+.export-btn { font-family: var(--font); font-size: 11px; padding: 5px 12px; border: 1px solid var(--border-md); border-radius: 7px; background: var(--surface); color: var(--text); cursor: pointer; margin-left: auto; }
+.export-btn:hover { background: var(--surface2); }
 
-Tier 3 — Nurture
+/* LEGEND */
+.legend { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 11px; font-size: 11px; color: var(--text-2); }
+.leg { display: flex; align-items: center; gap: 5px; }
+.leg-dot { width: 7px; height: 7px; border-radius: 50%; }
 
-Tier 4 — Monitor
+/* COUNT */
+.count-bar { font-size: 11px; color: var(--text-3); margin-bottom: 8px; font-family: var(--mono); }
 
-#
-ACCOUNT
-ARR
-HEALTH
-UTILIZATION
-DAYS TO RENEWAL
-RENEWAL DATE
-TIER
-ANGLE
-STATUS
-OUTREACH
-NOTES
+/* TABLE */
+.table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+thead tr { background: var(--surface2); }
+thead th { font-size: 10px; font-weight: 500; color: var(--text-3); text-align: left; padding: 8px 11px; border-bottom: 1px solid var(--border); white-space: nowrap; text-transform: uppercase; letter-spacing: .4px; }
+tbody tr { border-bottom: 1px solid var(--border); transition: background .1s; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: #FAFAF7; }
+tbody tr.reached { background: #F4FBF0; }
+td { padding: 8px 11px; font-size: 12px; vertical-align: middle; }
+td.rank { font-family: var(--mono); font-size: 10px; color: var(--text-3); width: 30px; }
+td.name { font-weight: 500; max-width: 210px; }
+td.name span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+td.arr { font-family: var(--mono); font-size: 11px; color: var(--text-2); white-space: nowrap; }
 
+/* PILLS */
+.tier-pill { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+.tier-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.tp1 { background: var(--coral-bg); color: var(--coral-dark); } .tp1 .tier-dot { background: var(--coral); }
+.tp2 { background: var(--amber-bg); color: var(--amber-dark); } .tp2 .tier-dot { background: #EF9F27; }
+.tp3 { background: var(--green-bg); color: var(--green-dark); } .tp3 .tier-dot { background: #639922; }
+.tp4 { background: var(--gray-bg); color: var(--gray); } .tp4 .tier-dot { background: #888780; }
 
+.angle-tag { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 6px; background: var(--surface2); color: var(--text-2); border: 1px solid var(--border); white-space: nowrap; }
+
+.ebr-tag { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 6px; white-space: nowrap; font-weight: 500; }
+.ebr-done { background: var(--green-bg); color: var(--green-dark); }
+.ebr-sent { background: var(--blue-bg); color: var(--blue); }
+.ebr-pending { background: var(--amber-bg); color: var(--amber-dark); }
+.ebr-risk { background: var(--red-bg); color: var(--red); }
+.ebr-none { background: var(--surface2); color: var(--text-3); }
+
+/* BARS */
+.bar-cell { display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+.bar-track { width: 46px; height: 4px; background: var(--surface2); border-radius: 3px; flex-shrink: 0; }
+.bar-fill { height: 4px; border-radius: 3px; }
+.bar-val { font-size: 11px; color: var(--text-2); font-family: var(--mono); min-width: 26px; }
+.days-val { font-family: var(--mono); font-size: 11px; }
+.days-red { color: var(--red); } .days-amber { color: var(--amber); } .days-gray { color: var(--text-3); }
+
+/* OUTREACH BTN */
+.ob { font-family: var(--font); font-size: 10px; font-weight: 500; padding: 3px 9px; border-radius: 20px; cursor: pointer; border: 1px solid var(--border-md); background: var(--surface); color: var(--text-3); transition: all .15s; white-space: nowrap; }
+.ob:hover { border-color: var(--green); color: var(--green); }
+.ob.done { background: var(--green-bg); border-color: var(--green); color: var(--green-dark); }
+
+/* CANCELLED ROW */
+tbody tr.cancelled { background: #FFF0F0 !important; }
+tbody tr.cancelled td { color: #A32D2D; }
+tbody tr.cancelled td.name span { text-decoration: line-through; color: #A32D2D; }
+tbody tr.cancelled:hover { background: #FFE8E8 !important; }
+
+/* STATUS DROPDOWN */
+.status-select { font-family: var(--font); font-size: 10px; padding: 2px 6px; border-radius: 6px; border: 1px solid var(--border-md); background: var(--surface); color: var(--text-2); cursor: pointer; outline: none; max-width: 110px; }
+.status-select.st-cancelled { background: var(--red-bg); border-color: #E8A0A0; color: var(--red); font-weight: 500; }
+.status-select.st-atrisk { background: var(--coral-bg); border-color: #E8B0A0; color: var(--coral-dark); font-weight: 500; }
+.status-select.st-good { background: var(--green-bg); border-color: #A0C8A0; color: var(--green-dark); font-weight: 500; }
+.status-select.st-churning { background: #2D1A1A; color: #F0C0C0; border-color: #5A2020; font-weight: 500; }
+
+/* NOTES */
+.note-cell { min-width: 140px; max-width: 180px; }
+.note-btn { font-family: var(--font); font-size: 10px; padding: 2px 8px; border-radius: 6px; border: 1px dashed var(--border-md); background: transparent; color: var(--text-3); cursor: pointer; white-space: nowrap; transition: all .15s; }
+.note-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-bg); }
+.note-btn.has-note { border-style: solid; border-color: var(--amber); color: var(--amber-dark); background: var(--amber-bg); max-width: 160px; overflow: hidden; text-overflow: ellipsis; display: block; }
+
+/* NOTE MODAL */
+.note-modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 200; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(2px); }
+.note-modal { background: var(--surface); border: 1px solid var(--border-md); border-radius: 12px; width: 480px; max-width: 95vw; padding: 20px 22px; box-shadow: 0 16px 48px rgba(0,0,0,.12); }
+.note-modal h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.note-modal p { font-size: 11px; color: var(--text-3); margin-bottom: 14px; font-family: var(--mono); }
+.note-modal textarea { width: 100%; height: 100px; font-family: var(--font); font-size: 13px; padding: 10px 12px; border: 1px solid var(--border-md); border-radius: 8px; background: var(--bg); color: var(--text); resize: vertical; outline: none; line-height: 1.6; }
+.note-modal textarea:focus { border-color: var(--text); }
+.note-modal-footer { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+.note-save-btn { font-family: var(--font); font-size: 12px; font-weight: 500; padding: 7px 16px; border-radius: 7px; border: none; background: var(--text); color: #fff; cursor: pointer; }
+.note-save-btn:hover { background: #333; }
+.note-cancel-btn { font-family: var(--font); font-size: 12px; padding: 7px 14px; border-radius: 7px; border: 1px solid var(--border-md); background: var(--surface2); color: var(--text-2); cursor: pointer; }
+.note-clear-btn { font-family: var(--font); font-size: 12px; padding: 7px 14px; border-radius: 7px; border: 1px solid var(--border-md); background: transparent; color: var(--red); cursor: pointer; margin-right: auto; }
+.note-clear-btn:hover { background: var(--red-bg); }
+
+/* SECTION NOTE */
+.sec-note { font-size: 12px; color: var(--text-2); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; margin-bottom: 13px; line-height: 1.6; }
+.sec-note strong { font-weight: 600; color: var(--text); }
+
+/* SUB-TABS inside Tab 2 */
+.sub-tabs { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+.sub-tab { font-family: var(--font); font-size: 12px; font-weight: 500; padding: 6px 14px; border-radius: 20px; cursor: pointer; border: 1px solid var(--border-md); background: var(--surface); color: var(--text-3); transition: all .15s; white-space: nowrap; }
+.sub-tab:hover { background: var(--surface2); color: var(--text-2); }
+.sub-tab.active { background: var(--text); color: #fff; border-color: var(--text); }
+.sub-tab-badge { font-size: 10px; font-weight: 600; margin-left: 4px; }
+.sub-pane { display: none; }
+.sub-pane.active { display: block; }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <div class="logo-mark"><span>M</span></div>
+    <div><span class="logo-text">Marq CSM</span><span class="logo-sub">/ Noor's Book of Business</span></div>
+  </div>
+  <div class="header-right" id="headerDate"></div>
+</header>
+
+<div class="main">
+  <div class="summary-row" id="summaryRow"></div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('priority',this)">Priority tiers <span class="tab-badge" id="badge-priority"></span></button>
+    <button class="tab-btn" onclick="switchTab('action',this)">Action needed <span class="tab-badge" id="badge-action"></span></button>
+  </div>
+
+  <!-- TAB 1: PRIORITY TIERS -->
+  <div id="tab-priority" class="tab-pane active">
+    <div class="controls">
+      <div class="ctrl-group"><label>Search</label><input type="text" id="p-search" placeholder="Account name..." oninput="renderPriority()"></div>
+      <div class="ctrl-sep"></div>
+      <div class="ctrl-group"><label>Tier</label>
+        <select id="p-tier" onchange="renderPriority()">
+          <option value="all">All tiers</option>
+          <option value="1">Tier 1 — Act now</option>
+          <option value="2">Tier 2 — Reach out soon</option>
+          <option value="3">Tier 3 — Nurture</option>
+          <option value="4">Tier 4 — Monitor</option>
+        </select>
+      </div>
+      <div class="ctrl-group"><label>Angle</label>
+        <select id="p-angle" onchange="renderPriority()">
+          <option value="all">All angles</option>
+          <option>Re-engage</option><option>Re-engage / rescue</option>
+          <option>Renewal risk — escalate</option><option>Drive adoption</option>
+          <option>Expand usage</option><option>Renewal prep</option><option>Product update</option>
+        </select>
+      </div>
+      <div class="ctrl-group"><label>Outreach</label>
+        <select id="p-ob" onchange="renderPriority()">
+          <option value="all">All</option>
+          <option value="done">Reached out ✓</option>
+          <option value="pending">Not yet</option>
+        </select>
+      </div>
+      <button class="export-btn" onclick="exportCSV('priority')">Export CSV</button>
+    </div>
+    <div class="legend">
+      <div class="leg"><div class="leg-dot" style="background:#D85A30"></div>Tier 1 — Act now</div>
+      <div class="leg"><div class="leg-dot" style="background:#EF9F27"></div>Tier 2 — Reach out soon</div>
+      <div class="leg"><div class="leg-dot" style="background:#639922"></div>Tier 3 — Nurture</div>
+      <div class="leg"><div class="leg-dot" style="background:#888780"></div>Tier 4 — Monitor</div>
+    </div>
+    <div class="count-bar" id="p-count"></div>
+    <div class="table-wrap"><div class="table-scroll">
+      <table>
+        <thead><tr>
+          <th>#</th><th>Account</th><th>ARR</th><th>Health</th><th>Utilization</th>
+          <th>Days to renewal</th><th>Renewal date</th><th>Tier</th><th>Angle</th><th>Status</th><th>Outreach</th><th>Notes</th>
+        </tr></thead>
+        <tbody id="p-tbody"></tbody>
+      </table>
+    </div></div>
+  </div>
+
+  <!-- TAB 2: ACTION NEEDED -->
+  <div id="tab-action" class="tab-pane">
+    <div class="sub-tabs">
+      <button class="sub-tab active" onclick="switchSub('renew90',this)">Renewing in 90 days <span class="sub-tab-badge" id="badge-renew90"></span></button>
+      <button class="sub-tab" onclick="switchSub('ebr',this)">EBR tracked <span class="sub-tab-badge" id="badge-ebr"></span></button>
+      <button class="sub-tab" onclick="switchSub('reached',this)">Reached out <span class="sub-tab-badge" id="badge-reached"></span></button>
+    </div>
+
+    <!-- 90-day renewals -->
+    <div id="sub-renew90" class="sub-pane active">
+      <div class="sec-note"><strong>Renewing within 90 days</strong> — these accounts need immediate attention. Tier 1 accounts first, then Tier 2 before their window closes.</div>
+      <div class="controls">
+        <div class="ctrl-group"><label>Search</label><input type="text" id="r90-search" placeholder="Account name..." oninput="renderSub('renew90')"></div>
+        <div class="ctrl-group"><label>Outreach</label>
+          <select id="r90-ob" onchange="renderSub('renew90')">
+            <option value="all">All</option><option value="done">Reached out ✓</option><option value="pending">Not yet</option>
+          </select>
+        </div>
+        <button class="export-btn" onclick="exportCSV('renew90')">Export CSV</button>
+      </div>
+      <div class="count-bar" id="r90-count"></div>
+      <div class="table-wrap"><div class="table-scroll">
+        <table>
+          <thead><tr>
+            <th>#</th><th>Account</th><th>ARR</th><th>Health</th><th>Utilization</th>
+            <th>Days to renewal</th><th>Renewal date</th><th>Tier</th><th>EBR status</th><th>Status</th><th>Outreach</th><th>Notes</th>
+          </tr></thead>
+          <tbody id="r90-tbody"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- EBR tracked -->
+    <div id="sub-ebr" class="sub-pane">
+      <div class="sec-note"><strong>EBR-tracked accounts</strong> — accounts with a stage, sequence enrollment, or EBR status logged. Use this view to track pending EBRs and follow up.</div>
+      <div class="controls">
+        <div class="ctrl-group"><label>Search</label><input type="text" id="ebr-search" placeholder="Account name..." oninput="renderSub('ebr')"></div>
+        <div class="ctrl-group"><label>EBR status</label>
+          <select id="ebr-filter" onchange="renderSub('ebr')">
+            <option value="all">All</option>
+            <option value="done">Done ✓</option>
+            <option value="sent">Email sent</option>
+            <option value="pending">Not done</option>
+            <option value="risk">At risk</option>
+          </select>
+        </div>
+        <div class="ctrl-group"><label>Outreach</label>
+          <select id="ebr-ob" onchange="renderSub('ebr')">
+            <option value="all">All</option><option value="done">Reached out ✓</option><option value="pending">Not yet</option>
+          </select>
+        </div>
+        <button class="export-btn" onclick="exportCSV('ebr')">Export CSV</button>
+      </div>
+      <div class="count-bar" id="ebr-count"></div>
+      <div class="table-wrap"><div class="table-scroll">
+        <table>
+          <thead><tr>
+            <th>#</th><th>Account</th><th>ARR</th><th>Health</th><th>Utilization</th>
+            <th>Days to renewal</th><th>Renewal date</th><th>Tier</th><th>Stage</th><th>EBR status</th><th>Status</th><th>Outreach</th><th>Notes</th>
+          </tr></thead>
+          <tbody id="ebr-tbody"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- Reached out -->
+    <div id="sub-reached" class="sub-pane">
+      <div class="sec-note"><strong>Accounts you've reached out to</strong> — marked via the outreach toggle across the dashboard. Use this to track your activity.</div>
+      <div class="controls">
+        <div class="ctrl-group"><label>Search</label><input type="text" id="ro-search" placeholder="Account name..." oninput="renderSub('reached')"></div>
+        <button class="export-btn" onclick="exportCSV('reached')">Export CSV</button>
+      </div>
+      <div class="count-bar" id="ro-count"></div>
+      <div class="table-wrap"><div class="table-scroll">
+        <table>
+          <thead><tr>
+            <th>#</th><th>Account</th><th>ARR</th><th>Health</th><th>Utilization</th>
+            <th>Days to renewal</th><th>Renewal date</th><th>Tier</th><th>Angle</th><th>Status</th><th>Outreach</th><th>Notes</th>
+          </tr></thead>
+          <tbody id="ro-tbody"></tbody>
+        </table>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTE MODAL -->
+<div class="note-modal-bg" id="noteModalBg" style="display:none" onclick="handleNoteModalBg(event)">
+  <div class="note-modal">
+    <h3 id="noteModalTitle"></h3>
+    <p id="noteModalSub"></p>
+    <textarea id="noteModalText" placeholder="Add a note about this account — context, next steps, things to remember..."></textarea>
+    <div class="note-modal-footer">
+      <button class="note-clear-btn" onclick="clearNote()">Clear note</button>
+      <button class="note-cancel-btn" onclick="closeNoteModal()">Cancel</button>
+      <button class="note-save-btn" onclick="saveNote()">Save note</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const TODAY = new Date('2026-05-05');
+document.getElementById('headerDate').textContent = 'Generated ' + TODAY.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+
+// name, arr, renewDate, health, licAlloc, util, stage, ebrStatus
+const RAW = [
+  ["schwazze.com",22272,"July 7, 2026",83,100,90.28,"EBR email sent","NOT DONE"],
+  ["Kramp Groep B.V.",17230.66,"May 25, 2026",79.2,100,45.31,"On the way to churn","NOT DONE"],
+  ["Tnemec Company, Inc.",15729.96,"April 28, 2027",92,100,90.48,"Renewed","DONE"],
+  ["Sazerac Company, Inc.",15699.96,"January 17, 2027",80.4,100,66.67,"Check in - Done",""],
+  ["Towson University",15312,"September 20, 2026",86.4,100,76.74,"",""],
+  ["UW Green Bay",14805,"June 22, 2026",67.7,100,48.21,"Risk of non-renewal","NOT DONE"],
+  ["George Washington's Mount Vernon",14676,"December 12, 2026",58.9,100,30,"",""],
+  ["AccentCare, Inc.",14124,"February 13, 2027",72.9,100,81.63,"",""],
+  ["University Of Calgary",14040,"August 31, 2027",79.7,100,40.35,"",""],
+  ["Frandsen Financial",13749.96,"December 22, 2026",73.8,100,95.56,"",""],
+  ["Widener University",13635,"November 1, 2027",74.2,100,54.55,"",""],
+  ["Spire Energy",13530,"February 18, 2027",68.5,74,41.46,"",""],
+  ["Quadreal Property Group",13474.92,"March 27, 2027",74.9,100,50,"",""],
+  ["MBK Senior Living LLC",13200,"June 2, 2026",77.7,100,93.88,"All good","DONE"],
+  ["Extreme Networks",13200,"May 29, 2026",67.3,100,42.11,"All good","DONE"],
+  ["YMCA of Central Maryland",13125,"January 25, 2027",85.6,100,55.56,"",""],
+  ["Ohio Alliance of YMCAs",12797.16,"September 1, 2026",78.3,100,58.93,"",""],
+  ["Molloy University",12759.92,"January 1, 2027",56.4,74,58.62,"",""],
+  ["Keaty Real Estate",12708,"September 1, 2028",90.9,100,82.61,"",""],
+  ["Bolton / IMA",12705,"April 28, 2027",82.6,100,66.67,"",""],
+  ["Morley College",12564.96,"August 29, 2026",55.1,100,29.55,"",""],
+  ["Stephen F. Austin State University",12448.44,"January 27, 2027",68,100,62.16,"",""],
+  ["Xplore",12000,"November 3, 2026",72.9,100,69.23,"",""],
+  ["Engel & Völkers",11880,"June 12, 2026",96.2,100,54.55,"All good","DONE"],
+  ["University of Louisville",11507.16,"March 5, 2027",75.6,100,97.5,"",""],
+  ["Starry",11385,"December 3, 2026",87,100,67.5,"",""],
+  ["SUNY Fredonia, Marketing & Communications",11199.96,"October 29, 2026",63.5,100,62.96,"",""],
+  ["BC Children's Hospital Foundation",11064.72,"December 18, 2026",70.7,100,40,"",""],
+  ["Creighton University",10899.96,"February 4, 2029",79.9,100,77.46,"",""],
+  ["TruFusion",10890,"April 30, 2027",83.1,74,80.85,"Unresponsive","NOT DONE"],
+  ["Utility Warehouse",10440,"December 18, 2026",75.6,100,93.1,"",""],
+  ["Eastern Mennonite University",10381.68,"June 20, 2026",66.6,100,52.94,"EBR email sent","NOT DONE"],
+  ["City of Joondalup",10350,"December 31, 2026",69,100,53.57,"",""],
+  ["Ohio University Communications and Marketing",10200,"June 29, 2026",58.9,74,28.13,"Risk of non-renewal","NOT DONE"],
+  ["EverCheck",9604.8,"July 18, 2026",74.4,100,50,"EBR email sent","NOT DONE"],
+  ["The Henry Ford",9422.4,"December 5, 2026",39.9,74,38.89,"",""],
+  ["Regis University",9160.2,"December 18, 2026",55.4,74,36,"",""],
+  ["East Side Union High School District",9135,"November 16, 2026",54.6,100,81.48,"",""],
+  ["Mercy University",9000,"December 17, 2026",50.4,100,79.17,"",""],
+  ["Drake University",9000,"July 1, 2026",67.2,100,41.38,"EBR email sent","NOT DONE"],
+  ["Serendipity Labs",8925,"January 2, 2027",71.5,100,68,"",""],
+  ["City of Columbus",8850,"February 26, 2027",65.7,74,81.25,"",""],
+  ["The Medical College of Wisconsin Inc",8799.96,"March 31, 2027",47.1,100,55,"",""],
+  ["Texas Tech University - Rawls College of Business",8749.92,"May 9, 2026",69.4,74,36,"EBR email sent","NOT DONE"],
+  ["Acre",8625,"May 1, 2026",83,100,48,"Check in - Required","DONE"],
+  ["The Shopping Center Group",8400,"March 14, 2027",80.8,100,100,"",""],
+  ["Governors State University",8315.76,"March 28, 2027",50.2,100,40,"",""],
+  ["Christian Reformed Church",8235,"April 20, 2027",55.8,100,60,"",""],
+  ["Visit Albuquerque",8235,"January 31, 2027",68.4,100,86.67,"",""],
+  ["T-Mobile Center",8119.92,"October 23, 2026",69.2,100,72.22,"",""],
+  ["Arthur J. Gallagher & Co.",8119.92,"October 9, 2026",66.6,100,76.47,"",""],
+  ["St. Paul's Foundation",8119.92,"May 26, 2026",62.4,100,54.05,"EBR email sent","NOT DONE"],
+  ["Senior Services of America",8073.48,"February 1, 2027",83.5,100,50,"",""],
+  ["Bellevue University",8004,"October 17, 2026",75.5,100,85,"",""],
+  ["UofL Health",8004,"September 6, 2026",72,100,88.24,"",""],
+  ["The University of Colorado",8004,"December 8, 2026",53.8,100,68.75,"",""],
+  ["JEVS Human Services",7470.36,"July 27, 2026",44.7,100,68.42,"Risk of non-renewal","NOT DONE"],
+  ["Houlihan Lawrence",7423.92,"July 31, 2026",81.6,100,60,"EBR email sent","NOT DONE"],
+  ["York House School",6999.96,"July 1, 2027",70.3,100,73.68,"",""],
+  ["Eastland Vocational School District",6979.32,"July 8, 2026",37.9,100,50,"EBR email sent","NOT DONE"],
+  ["Simon Fraser University",6975.36,"February 13, 2027",78.4,100,21.05,"",""],
+  ["Berklee College of Music, Inc.",6963.36,"August 29, 2026",48.4,100,88.24,"",""],
+  ["FTI Consulting",6963.36,"November 30, 2026",68,100,20,"",""],
+  ["Midwestern State University",6960,"September 25, 2026",47.9,100,60,"",""],
+  ["Eastern Michigan University",6960,"May 3, 2026",52.1,100,16.67,"EBR email sent","NOT DONE"],
+  ["Manhattanville College",6874.92,"July 6, 2026",61.9,74,50,"EBR email sent","NOT DONE"],
+  ["Eller College of Management at The University of Arizona",6458.76,"March 26, 2027",31,100,11.76,"",""],
+  ["AmeriLife Benefits",6420,"October 20, 2026",81.2,100,100,"",""],
+  ["Cengage Learning",6403.2,"December 13, 2026",50.9,100,46.67,"",""],
+  ["Benton Dickinson C. R. Bard",6403.2,"June 15, 2026",75.9,100,35,"EBR email sent","NOT DONE"],
+  ["B6 Real Estate Advisors",6003,"October 15, 2026",82.9,100,92.31,"",""],
+  ["University of California, Berkeley (UC Berkeley)",6000,"November 30, 2026",59.4,100,47.37,"",""],
+  ["Salina USD 305",5916,"July 7, 2028",67.4,100,88.24,"",""],
+  ["Dominican University",5729.4,"February 11, 2027",32.6,100,20,"",""],
+  ["Kelly Club",5430.61,"March 12, 2028",96.5,100,93.33,"",""],
+  ["University of Michigan",4999.92,"July 17, 2028",58.7,100,53.33,"",""],
+  ["Remax Executive",4999.92,"August 31, 2026",74.1,100,85.71,"",""],
+  ["Saint Joseph's University",4999.92,"May 29, 2026",68,100,80,"EBR - Renewal Done","DONE"],
+  ["Fairport Central School District",4524,"July 2, 2026",36.5,100,50,"Follow up - Required","NOT DONE"],
+  ["Lifespace Communities, Inc.",4036.8,"February 14, 2027",56.8,100,70,"",""],
+  ["Saint Anselm College",4002,"December 14, 2026",79.4,100,80,"",""],
+  ["United Site Services",3999.96,"May 28, 2026",75.3,100,80,"Follow up - Required","In Progress"],
+  ["Real Estate One, Inc.",3600,"August 8, 2026",57.6,100,30,"",""],
+  ["Onboard RS Inc",3480,"January 22, 2027",65.4,100,75,"",""],
+  ["The Poke Company",3480,"June 17, 2026",64.7,100,33.33,"EBR email sent","NOT DONE"],
+  ["Curzon",3480,"April 3, 2027",67,100,88.89,"",""],
+  ["Seattle Aquarium",3288.6,"August 16, 2026",62.7,100,88.89,"",""],
+  ["Adirondack Community College",3229.32,"April 3, 2027",74.7,100,90,"",""],
+  ["YMCA of Greater Pittsburgh",3201.6,"July 9, 2026",46.7,100,26.32,"EBR email sent","NOT DONE"],
+  ["Ducks Unlimited Canada",3000,"March 6, 2027",65.2,49,82.35,"",""],
+  ["Trinity Western University",3000,"August 1, 2026",50.9,49,22.67,"Reseller Account",""],
+  ["University of California, Los Angeles (UCLA)",3000,"July 19, 2026",11,74,0,"Cancelled","NOT DONE"],
+  ["Chapman University Strategic Marketing and Communications",2899.92,"August 29, 2026",38.3,100,25,"",""],
+  ["The Faris Team",2784,"July 29, 2026",84.1,100,77.78,"EBR email sent","NOT DONE"],
+  ["Spiffy",2784,"November 19, 2026",50.1,100,40,"",""],
+  ["HubSpot",2784,"June 20, 2026",18.9,74,0,"EBR email sent","NOT DONE"],
+  ["The University of Colorado (Auraria)",2610,"February 2, 2027",78,100,80,"",""],
+  ["YMCA of San Francisco",2436,"October 31, 2026",81,100,70,"",""],
+  ["Vitalius",2400,"August 1, 2026",64.9,100,30,"",""],
+  ["teamtelescope.co.uk",2400,"March 31, 2027",64.1,74,42.86,"",""],
+  ["Metropolis Technology Company, LLC (SP Plus)",2400,"March 31, 2027",22.2,49,50,"",""],
+  ["Algonquin College",2400,"January 13, 2027",76.1,100,87.5,"",""],
+  ["Natural Grocers by Vitamin Cottage",2400,"December 19, 2026",57,100,50,"",""],
+  ["Missouri State Alliance of YMCAs",2199.96,"September 29, 2027",80.5,100,73.33,"",""],
+  ["Hayman Partners",2156.06,"November 10, 2026",90.6,100,100,"",""],
+  ["Staunton-Augusta Family YMCA",1827,"July 22, 2026",83,74,77.78,"EBR email sent","NOT DONE"],
+  ["Albemarle Corporation",1800,"March 10, 2027",11,74,0,"",""],
+  ["Kelly Sports NZ",1560.21,"March 12, 2027",84.2,100,93.33,"",""],
+  ["North Carolina Alliance of YMCAs",1461.6,"November 30, 2026",94.9,100,91.67,"",""],
+  ["Barton Associates Inc.",1296.6,"December 17, 2026",11,49,0,"",""],
+  ["Duluth Area Family YMCA",1291.8,"April 17, 2027",60.1,100,90,"",""],
+  ["YMCA of Greater Des Moines Iowa",1291.8,"January 16, 2027",60.1,100,70,"",""],
+  ["YMCA of Greater Tulsa",1218,"July 23, 2026",85.9,100,88.89,"EBR email sent","NOT DONE"],
+  ["Cambridge Public Schools",1200.6,"July 6, 2026",18.5,100,25,"EBR email sent","NOT DONE"],
+  ["Make Liberty Win",1200,"November 1, 2028",80.3,0,60,"",""],
+  ["YMCA of Metropolitan Fort Worth",1050,"January 1, 2028",74.6,100,68.97,"",""],
+  ["Altos Planos",999.96,"February 22, 2027",45.1,49,31.91,"",""],
+  ["knutenelson.org",999.96,"April 30, 2026",52.6,49,48.92,"Reseller Account",""],
+  ["JBG Smith",999.96,"May 31, 2026",52.2,100,25,"EBR email sent","NOT DONE"],
+  ["Sherman Lake YMCA Outdoor Center",874.44,"April 11, 2027",58.9,100,100,"",""],
+  ["University of St. Francis",753.96,"May 14, 2026",31.7,100,50,"EBR done","DONE"],
+  ["Great Plains Family YMCA Inc.",609,"September 5, 2026",1.7,74,0,"",""],
+  ["Piedmont Family YMCA Inc.",609,"June 15, 2026",56.3,100,100,"EBR email sent","NOT DONE"],
+  ["Dickson County Family YMCA",609,"September 20, 2026",44.6,100,40,"",""],
+  ["Whatcom Family YMCA",609,"September 29, 2026",57.9,100,80,"",""],
+  ["Merrimack Valley YMCA",525,"October 27, 2026",30.7,100,40,"",""],
+  ["McGaw YMCA",510,"August 1, 2026",42.9,100,33.33,"",""]
+];
+
+function du(s){ return Math.round((new Date(s)-TODAY)/86400000); }
+
+function getAngle(h,u,l,d,stage,customStatus){
+  const st=(customStatus||'').toLowerCase();
+  const s=(stage||'').toLowerCase();
+  if(st==='cancelled'||s.includes('cancel')) return "Re-engage / rescue";
+  if(st==='churning'||s.includes('churn')) return "Re-engage / rescue";
+  if(st==='non-renewal risk'||s.includes('non-renewal')||s.includes('risk')) return "Renewal risk — escalate";
+  if(s.includes('unresponsive')) return "Re-engage";
+  if(h<50||u===0) return "Re-engage";
+  if(d<=90&&h<75) return "Renewal prep";
+  if(u<50&&d<270) return "Drive adoption";
+  if(l<100) return "Expand usage";
+  if(d<=90) return "Renewal prep";
+  return "Product update";
+}
+
+function getTier(h,u,d,stage,customStatus){
+  const st=(customStatus||'').toLowerCase();
+  const s=(stage||'').toLowerCase();
+  if(st==='cancelled'||st==='churning'||s.includes('churn')||s.includes('cancel')||s.includes('non-renewal')) return 1;
+  if(h<50||(h<65&&u===0&&d<200)) return 1;
+  if(d<=90&&h<65) return 1;
+  if(d<=90||(h<65&&u<50)) return 2;
+  if(h>=75&&u>=70) return 4;
+  return 3;
+}
+
+function hasEBR(stage,ebr){
+  const s=(stage||'').trim(); const e=(ebr||'').trim();
+  return s!==''||e!=='';
+}
+
+const accounts = RAW.map(r=>{
+  const [name,arr,dateStr,health,lic,util,stage,ebrStatus]=r;
+  const days=du(dateStr);
+  // Initial stage used for tier/angle — will be overridden by customStatus at render time
+  const tier=getTier(health,util,days,stage||'','');
+  const angle=getAngle(health,util,lic,days,stage||'','');
+  const ebr=hasEBR(stage,ebrStatus);
+  const renew90=days<=90;
+  return{name,arr,dateStr,health,lic,util,stage:stage||'',ebrStatus:ebrStatus||'',days,tier,angle,ebr,renew90};
+}).sort((a,b)=>a.tier-b.tier||b.arr-a.arr);
+
+// ── STORAGE ──
+function getOB(){ try{return JSON.parse(localStorage.getItem('marq_ob')||'{}')}catch(e){return{}} }
+function saveOB(s){ try{localStorage.setItem('marq_ob',JSON.stringify(s))}catch(e){} }
+function toggleOB(name){ const s=getOB(); s[name]=!s[name]; saveOB(s); refreshAll(); }
+
+function getStatuses(){ try{return JSON.parse(localStorage.getItem('marq_status')||'{}')}catch(e){return{}} }
+function saveStatuses(s){ try{localStorage.setItem('marq_status',JSON.stringify(s))}catch(e){} }
+function setStatus(name,val){ const s=getStatuses(); s[name]=val; saveStatuses(s); refreshAll(); }
+
+function getNotes(){ try{return JSON.parse(localStorage.getItem('marq_notes')||'{}')}catch(e){return{}} }
+function saveNotes(n){ try{localStorage.setItem('marq_notes',JSON.stringify(n))}catch(e){} }
+
+// ── NOTE MODAL ──
+let _currentNoteName='';
+function openNote(name){
+  _currentNoteName=name;
+  const notes=getNotes();
+  document.getElementById('noteModalTitle').textContent=name;
+  document.getElementById('noteModalSub').textContent='Add context, next steps, or anything worth remembering';
+  document.getElementById('noteModalText').value=notes[name]||'';
+  document.getElementById('noteModalBg').style.display='flex';
+  setTimeout(()=>document.getElementById('noteModalText').focus(),50);
+}
+function closeNoteModal(){ document.getElementById('noteModalBg').style.display='none'; }
+function handleNoteModalBg(e){ if(e.target===document.getElementById('noteModalBg')) closeNoteModal(); }
+function saveNote(){
+  const val=document.getElementById('noteModalText').value.trim();
+  const notes=getNotes();
+  if(val) notes[_currentNoteName]=val; else delete notes[_currentNoteName];
+  saveNotes(notes); closeNoteModal(); refreshAll();
+}
+function clearNote(){
+  const notes=getNotes(); delete notes[_currentNoteName]; saveNotes(notes); closeNoteModal(); refreshAll();
+}
+
+// ── RENDER HELPERS ──
+function hBar(v){ const c=v<50?'#E24B4A':v<70?'#EF9F27':'#639922'; return `<div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:${v}%;background:${c}"></div></div><span class="bar-val">${v}</span></div>`; }
+function uBar(v){ const c=v===0?'#E24B4A':v<50?'#EF9F27':'#639922'; return `<div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:${v}%;background:${c}"></div></div><span class="bar-val">${v}%</span></div>`; }
+function dCell(d){ const cls=d<=0?'days-red':d<=90?'days-red':d<=180?'days-amber':'days-gray'; return `<span class="days-val ${cls}">${d<=0?'Overdue':d+'d'}</span>`; }
+function tPill(t){ const L={1:'Act now',2:'Soon',3:'Nurture',4:'Monitor'}; return `<span class="tier-pill tp${t}"><span class="tier-dot"></span>${L[t]}</span>`; }
+
+function obBtn(name,done){
+  const nm=name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+  return `<button class="ob ${done?'done':''}" onclick="toggleOB('${nm}')">${done?'✓ Done':'Mark done'}</button>`;
+}
+
+function statusSelect(name, currentStatus){
+  const nm=name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+  const opts=[
+    ['','Active'],['non-renewal risk','Non-renewal risk'],['churning','Churning'],
+    ['cancelled','Cancelled'],['all good','All good'],['unresponsive','Unresponsive']
+  ];
+  const cls=currentStatus==='cancelled'?'st-cancelled':currentStatus==='churning'?'st-churning':currentStatus==='all good'?'st-good':currentStatus==='non-renewal risk'?'st-atrisk':'';
+  const options=opts.map(([v,l])=>`<option value="${v}" ${currentStatus===v?'selected':''}>${l}</option>`).join('');
+  return `<select class="status-select ${cls}" onchange="setStatus('${nm}',this.value)">${options}</select>`;
+}
+
+function noteBtn(name){
+  const nm=name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+  const notes=getNotes();
+  const note=notes[name]||'';
+  if(note){ const preview=note.length>22?note.substring(0,22)+'…':note; return `<button class="note-btn has-note" title="${note.replace(/"/g,'&quot;')}" onclick="openNote('${nm}')">${preview}</button>`; }
+  return `<button class="note-btn" onclick="openNote('${nm}')">+ Add note</button>`;
+}
+
+function rowClass(a, ob, customStatus){
+  if(customStatus==='cancelled') return 'cancelled';
+  if(ob) return 'reached';
+  return '';
+}
+
+function ebrTag(stage,ebrStatus){
+  const s=(stage||'').toLowerCase(); const e=(ebrStatus||'').toUpperCase().trim();
+  if(e==='DONE'||s.includes('done')||s.includes('renewed')) return `<span class="ebr-tag ebr-done">Done ✓</span>`;
+  if(e==='IN PROGRESS') return `<span class="ebr-tag ebr-sent">In progress</span>`;
+  if(s.includes('email sent')) return `<span class="ebr-tag ebr-sent">Email sent</span>`;
+  if(e==='NOT DONE'&&(s.includes('risk')||s.includes('churn'))) return `<span class="ebr-tag ebr-risk">At risk</span>`;
+  if(e==='NOT DONE') return `<span class="ebr-tag ebr-pending">Pending</span>`;
+  if(s.includes('all good')||s.includes('check in')) return `<span class="ebr-tag ebr-done">Done ✓</span>`;
+  if(s) return `<span class="ebr-tag ebr-pending">${stage}</span>`;
+  return `<span class="ebr-tag ebr-none">—</span>`;
+}
+
+function rowP(a,i,ob,cs){
+  const rc=rowClass(a,ob,cs);
+  return `<tr class="${rc}"><td class="rank">${i+1}</td><td class="name"><span title="${a.name}">${a.name}</span></td><td class="arr">$${Math.round(a.arr).toLocaleString()}</td><td>${hBar(a.health)}</td><td>${uBar(a.util)}</td><td>${dCell(a.days)}</td><td style="font-size:11px;color:var(--text-2);white-space:nowrap">${a.dateStr}</td><td>${tPill(a.tier)}</td><td><span class="angle-tag">${a.angle}</span></td><td>${statusSelect(a.name,cs)}</td><td>${obBtn(a.name,ob)}</td><td class="note-cell">${noteBtn(a.name)}</td></tr>`;
+}
+function rowR90(a,i,ob,cs){
+  const rc=rowClass(a,ob,cs);
+  return `<tr class="${rc}"><td class="rank">${i+1}</td><td class="name"><span title="${a.name}">${a.name}</span></td><td class="arr">$${Math.round(a.arr).toLocaleString()}</td><td>${hBar(a.health)}</td><td>${uBar(a.util)}</td><td>${dCell(a.days)}</td><td style="font-size:11px;color:var(--text-2);white-space:nowrap">${a.dateStr}</td><td>${tPill(a.tier)}</td><td>${ebrTag(a.stage,a.ebrStatus)}</td><td>${statusSelect(a.name,cs)}</td><td>${obBtn(a.name,ob)}</td><td class="note-cell">${noteBtn(a.name)}</td></tr>`;
+}
+function rowEBR(a,i,ob,cs){
+  const rc=rowClass(a,ob,cs);
+  return `<tr class="${rc}"><td class="rank">${i+1}</td><td class="name"><span title="${a.name}">${a.name}</span></td><td class="arr">$${Math.round(a.arr).toLocaleString()}</td><td>${hBar(a.health)}</td><td>${uBar(a.util)}</td><td>${dCell(a.days)}</td><td style="font-size:11px;color:var(--text-2);white-space:nowrap">${a.dateStr}</td><td>${tPill(a.tier)}</td><td style="font-size:11px;color:var(--text-2)">${a.stage||'—'}</td><td>${ebrTag(a.stage,a.ebrStatus)}</td><td>${statusSelect(a.name,cs)}</td><td>${obBtn(a.name,ob)}</td><td class="note-cell">${noteBtn(a.name)}</td></tr>`;
+}
+
+function renderPriority(){
+  const q=document.getElementById('p-search').value.toLowerCase();
+  const tF=document.getElementById('p-tier').value;
+  const aF=document.getElementById('p-angle').value;
+  const oF=document.getElementById('p-ob').value;
+  const state=getOB(); const statuses=getStatuses();
+  const f=accounts.filter(a=>{
+    if(q&&!a.name.toLowerCase().includes(q)) return false;
+    if(tF!=='all'&&a.tier!==+tF) return false;
+    if(aF!=='all'&&a.angle!==aF) return false;
+    if(oF==='done'&&!state[a.name]) return false;
+    if(oF==='pending'&&state[a.name]) return false;
+    return true;
+  });
+  document.getElementById('p-count').textContent=f.length+' of '+accounts.length+' accounts';
+  document.getElementById('p-tbody').innerHTML=f.map((a,i)=>rowP(a,i,!!state[a.name],statuses[a.name]||'')).join('');
+}
+
+function renderSub(which){
+  const state=getOB(); const statuses=getStatuses();
+  if(which==='renew90'){
+    const q=document.getElementById('r90-search').value.toLowerCase();
+    const oF=document.getElementById('r90-ob').value;
+    const f=accounts.filter(a=>{
+      if(!a.renew90) return false;
+      if(q&&!a.name.toLowerCase().includes(q)) return false;
+      if(oF==='done'&&!state[a.name]) return false;
+      if(oF==='pending'&&state[a.name]) return false;
+      return true;
+    });
+    document.getElementById('r90-count').textContent=f.length+' of '+accounts.filter(a=>a.renew90).length+' accounts';
+    document.getElementById('r90-tbody').innerHTML=f.map((a,i)=>rowR90(a,i,!!state[a.name],statuses[a.name]||'')).join('');
+  } else if(which==='ebr'){
+    const q=document.getElementById('ebr-search').value.toLowerCase();
+    const eF=document.getElementById('ebr-filter').value;
+    const oF=document.getElementById('ebr-ob').value;
+    const base=accounts.filter(a=>a.ebr);
+    const f=base.filter(a=>{
+      if(q&&!a.name.toLowerCase().includes(q)) return false;
+      if(oF==='done'&&!state[a.name]) return false;
+      if(oF==='pending'&&state[a.name]) return false;
+      const s=(a.stage||'').toLowerCase(); const e=(a.ebrStatus||'').toUpperCase().trim();
+      if(eF==='done'&&!(e==='DONE'||s.includes('done')||s.includes('renewed')||s.includes('all good'))) return false;
+      if(eF==='sent'&&!s.includes('email sent')) return false;
+      if(eF==='pending'&&e!=='NOT DONE') return false;
+      if(eF==='risk'&&!(s.includes('risk')||s.includes('churn')||s.includes('cancel'))) return false;
+      return true;
+    });
+    document.getElementById('ebr-count').textContent=f.length+' of '+base.length+' accounts';
+    document.getElementById('ebr-tbody').innerHTML=f.map((a,i)=>rowEBR(a,i,!!state[a.name],statuses[a.name]||'')).join('');
+  } else if(which==='reached'){
+    const q=document.getElementById('ro-search').value.toLowerCase();
+    const f=accounts.filter(a=>{
+      if(!state[a.name]) return false;
+      if(q&&!a.name.toLowerCase().includes(q)) return false;
+      return true;
+    });
+    document.getElementById('ro-count').textContent=f.length+' accounts marked reached out';
+    document.getElementById('ro-tbody').innerHTML=f.map((a,i)=>rowP(a,i,true,statuses[a.name]||'')).join('');
+  }
+}
+
+function refreshAll(){
+  renderPriority();
+  renderSub('renew90');
+  renderSub('ebr');
+  renderSub('reached');
+  updateSummary();
+}
+
+function updateSummary(){
+  const state=getOB(); const statuses=getStatuses();
+  const cancelled=accounts.filter(a=>statuses[a.name]==='cancelled'||(a.stage||'').toLowerCase().includes('cancel')).length;
+  const t1=accounts.filter(a=>a.tier===1).length;
+  const t2=accounts.filter(a=>a.tier===2).length;
+  const r90=accounts.filter(a=>a.renew90).length;
+  const ebrPending=accounts.filter(a=>a.ebr&&(a.ebrStatus||'').toUpperCase().trim()==='NOT DONE').length;
+  const totalDone=Object.values(state).filter(Boolean).length;
+  const t1done=accounts.filter(a=>a.tier===1&&state[a.name]).length;
+  const t2done=accounts.filter(a=>a.tier===2&&state[a.name]).length;
+  const totalARR=accounts.reduce((s,a)=>s+a.arr,0);
+  document.getElementById('summaryRow').innerHTML=`
+    <div class="scard s1"><div class="val">${t1}</div><div class="lbl">Tier 1 — act now</div>${t1done?`<div class="sub">${t1done} reached out</div>`:''}</div>
+    <div class="scard s2"><div class="val">${t2}</div><div class="lbl">Tier 2 — reach out soon</div>${t2done?`<div class="sub">${t2done} reached out</div>`:''}</div>
+    <div class="scard s3"><div class="val">${r90}</div><div class="lbl">Renewing in 90 days</div></div>
+    <div class="scard s4"><div class="val">${totalDone}</div><div class="lbl">Reached out · ${accounts.length-totalDone} remaining</div></div>
+    <div class="scard s5"><div class="val">${ebrPending}</div><div class="lbl">EBR pending</div></div>
+    <div class="scard s6"><div class="val" style="color:var(--red)">${cancelled}</div><div class="lbl">Cancelled / at-risk</div></div>`;
+  document.getElementById('badge-priority').textContent=accounts.length;
+  document.getElementById('badge-action').textContent=r90+' urgent';
+  document.getElementById('badge-renew90').textContent=r90;
+  document.getElementById('badge-ebr').textContent=accounts.filter(a=>a.ebr).length;
+  document.getElementById('badge-reached').textContent=totalDone;
+}
+
+function switchTab(id,el){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+}
+
+function switchSub(id,el){
+  document.querySelectorAll('.sub-tab').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.sub-pane').forEach(p=>p.classList.remove('active'));
+  document.getElementById('sub-'+id).classList.add('active');
+}
+
+function exportCSV(which){
+  const state=getOB(); const statuses=getStatuses(); const notes=getNotes();
+  let rows=[], hdr=[], list=[];
+  if(which==='priority'){
+    list=accounts;
+    hdr=['Account','ARR','Health','Utilization %','Days to Renewal','Renewal Date','Tier','Angle','Status','Reached Out','Notes'];
+    rows=list.map(a=>[`"${a.name}"`,a.arr,a.health,a.util+'%',a.days,`"${a.dateStr}"`,a.tier,`"${a.angle}"`,`"${statuses[a.name]||'Active'}"`,state[a.name]?'Yes':'No',`"${(notes[a.name]||'').replace(/"/g,"'")}"`]);
+  } else if(which==='renew90'){
+    list=accounts.filter(a=>a.renew90);
+    hdr=['Account','ARR','Health','Utilization %','Days to Renewal','Renewal Date','Tier','Stage','EBR Status','Status','Reached Out','Notes'];
+    rows=list.map(a=>[`"${a.name}"`,a.arr,a.health,a.util+'%',a.days,`"${a.dateStr}"`,a.tier,`"${a.stage}"`,`"${a.ebrStatus}"`,`"${statuses[a.name]||'Active'}"`,state[a.name]?'Yes':'No',`"${(notes[a.name]||'').replace(/"/g,"'")}"`]);
+  } else if(which==='ebr'){
+    list=accounts.filter(a=>a.ebr);
+    hdr=['Account','ARR','Health','Utilization %','Days to Renewal','Renewal Date','Tier','Stage','EBR Status','Status','Reached Out','Notes'];
+    rows=list.map(a=>[`"${a.name}"`,a.arr,a.health,a.util+'%',a.days,`"${a.dateStr}"`,a.tier,`"${a.stage}"`,`"${a.ebrStatus}"`,`"${statuses[a.name]||'Active'}"`,state[a.name]?'Yes':'No',`"${(notes[a.name]||'').replace(/"/g,"'")}"`]);
+  } else if(which==='reached'){
+    list=accounts.filter(a=>state[a.name]);
+    hdr=['Account','ARR','Health','Utilization %','Days to Renewal','Renewal Date','Tier','Angle','Status','Notes'];
+    rows=list.map(a=>[`"${a.name}"`,a.arr,a.health,a.util+'%',a.days,`"${a.dateStr}"`,a.tier,`"${a.angle}"`,`"${statuses[a.name]||'Active'}"`,`"${(notes[a.name]||'').replace(/"/g,"'")}"`]);
+  }
+  const csv=[hdr,...rows].map(r=>r.join(',')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv'});
+  const url=URL.createObjectURL(blob);
+  const el=document.createElement('a');
+  el.href=url; el.download=`marq_${which}.csv`; el.click();
+  URL.revokeObjectURL(url);
+}
+
+refreshAll();
+</script>
+</body>
+</html>
